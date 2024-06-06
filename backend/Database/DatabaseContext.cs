@@ -19,14 +19,6 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            var connectionString =
-                "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=postgres;";
-
-            optionsBuilder.UseNpgsql(connectionString);
-        }
-
         optionsBuilder.UseSnakeCaseNamingConvention();
     }
 }
