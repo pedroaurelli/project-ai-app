@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "project-ai-api", "project-ai\project-ai-api.csproj", "{E2098662-5CEA-4674-873C-7929C30020AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "project-ai\Api.csproj", "{E2098662-5CEA-4674-873C-7929C30020AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{D97C2693-FBD5-4698-B27A-61ED35E30142}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{14E70BBC-9B02-4CA4-AD20-F93F1ABBFA54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{14E70BBC-9B02-4CA4-AD20-F93F1ABBFA54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{887D724D-BAE9-423A-A420-6C7DB2180721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{887D724D-BAE9-423A-A420-6C7DB2180721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{E8812AD5-0279-422C-B439-E353EAC8BA4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{E8812AD5-0279-422C-B439-E353EAC8BA4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{95C51318-8674-48B4-9F92-A7701C2F74B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{95C51318-8674-48B4-9F92-A7701C2F74B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
