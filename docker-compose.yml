@@ -13,6 +13,20 @@ services:
     networks:
       - project-ai-network
 
+  localstack:
+    container_name: project-ai-localstack-s3
+    image: localstack/localstack:3.3.0
+    ports:
+      - "4566:4566"
+    environment:
+      - DEBUG=1
+      - AWS_DEFAULT_REGION=sa-east-1
+      - SERVICES=s3
+    volumes:
+      - "./localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./create-s3-bucket.sh:/etc/localstack/init/ready.d/create-s3-bucket.sh"
+
 networks:
   project-ai-network:
 

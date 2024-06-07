@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "create-bucket": "docker exec -it project-ai-localstack-s3 awslocal s3 mb s3://audios"
+  }
+}

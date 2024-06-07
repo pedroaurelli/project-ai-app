@@ -4,6 +4,9 @@
 # docker
 /postgres
 
+#localstack
+/localstack
+
 # globs
 Makefile.in
 *.userprefs
