@@ -17,7 +17,7 @@ public class DatabaseContext : DbContext
 
     public DbSet<Audio> Audios { get; set; }
 
-    public DbSet<AudioText> AudioTexts { get; set; }
+    public DbSet<AudioTranscription> AudioTranscriptions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -3,6 +3,7 @@ using System;
 using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240607133640_AddContentTypeToAudioModels")]
+    partial class AddContentTypeToAudioModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace Database.Migrations
                     b.ToTable("audios", (string)null);
                 });
 
-            modelBuilder.Entity("Models.AudioTranscription", b =>
+            modelBuilder.Entity("Models.AudioText", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,22 +78,22 @@ namespace Database.Migrations
                         .HasColumnName("text");
 
                     b.HasKey("Id")
-                        .HasName("pk_audio_transcriptions");
+                        .HasName("pk_audio_texts");
 
                     b.HasIndex("AudioId")
-                        .HasDatabaseName("ix_audio_transcriptions_audio_id");
+                        .HasDatabaseName("ix_audio_texts_audio_id");
 
-                    b.ToTable("audio_transcriptions", (string)null);
+                    b.ToTable("audio_texts", (string)null);
                 });
 
-            modelBuilder.Entity("Models.AudioTranscription", b =>
+            modelBuilder.Entity("Models.AudioText", b =>
                 {
                     b.HasOne("Models.Audio", "Audio")
                         .WithMany()
                         .HasForeignKey("AudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_audio_transcriptions_audios_audio_id");
+                        .HasConstraintName("fk_audio_texts_audios_audio_id");
 
                     b.Navigation("Audio");
                 });
