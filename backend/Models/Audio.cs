@@ -1,6 +1,6 @@
 ﻿namespace Models;
 
-public class FileStorage
+public class Audio
 {
     public Guid Id { get; set; }
 
