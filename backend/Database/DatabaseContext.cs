@@ -15,10 +15,20 @@ public class DatabaseContext : DbContext
     {
     }
 
-    public DbSet<FileStorage> FilesStorage { get; set; }
+    public DbSet<Audio> Audios { get; set; }
+
+    public DbSet<AudioText> AudioTexts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connectionString =
+                "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=postgres;";
+
+            optionsBuilder.UseNpgsql(connectionString);
+        }
+
         optionsBuilder.UseSnakeCaseNamingConvention();
     }
 }
