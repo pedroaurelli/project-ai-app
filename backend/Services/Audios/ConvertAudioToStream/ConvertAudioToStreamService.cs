@@ -13,7 +13,7 @@ public class ConvertAudioToStreamService : Service
         this._uploadFileToS3BucketService = uploadFileToS3BucketService;
     }
 
-    public async Task<Stream> ConvertAudioToStreamAsync(
+    public async Task<ConvertAudioToStreamResult> ConvertAudioToStreamAsync(
         IFormFile file,
         CancellationToken cancellationToken = default)
     {
@@ -45,9 +45,15 @@ public class ConvertAudioToStreamService : Service
             ContentType = file.ContentType
         };
 
-        await _uploadFileToS3BucketService.UploadToS3BucketAsync(contentToAws, cancellationToken);
+        var audioId = await _uploadFileToS3BucketService.UploadToS3BucketAsync(contentToAws, cancellationToken);
 
-        return clonedStream;
+        var result = new ConvertAudioToStreamResult
+        {
+            AudioId = audioId,
+            Stream = clonedStream
+        };
+
+        return result;
     }
 }
 
