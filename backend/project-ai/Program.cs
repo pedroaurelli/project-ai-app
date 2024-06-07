@@ -2,9 +2,9 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Database;
-using Services;
 using Microsoft.EntityFrameworkCore;
 using OpenAI_API;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +41,7 @@ builder.Host.ConfigureServices((host, services) =>
     var s3Client = new AmazonS3Client(credentials, s3Config);
 
     services.AddSingleton<IAmazonS3>(s3Client);
+
     services.AddSingleton(sg => new OpenAIAPI(
         configuration.GetValue<string>("OpenAI:API_KEY")));
 });
