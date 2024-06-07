@@ -1,6 +1,6 @@
 ﻿namespace Models;
 
-public class AudioText
+public class AudioTranscription
 {
     public Guid Id { get; set; }
 
