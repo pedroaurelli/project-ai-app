@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { BaseClientOptions } from './clients/base-client'
-import { ApplicationLogsClient } from './clients/application-logs/application-logs-client'
-import { ActionValueClient } from './clients/action-value'
+import { ActionValueClient, ApplicationLogsClient } from './clients'
 
 export type ApiClientOptions = {
   baseURL?: string
