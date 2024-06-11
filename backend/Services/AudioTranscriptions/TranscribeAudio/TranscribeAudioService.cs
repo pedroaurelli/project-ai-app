@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using OpenAI_API;
+using OpenAI_API.Chat;
+using OpenAI_API.Models;
 using Services.Audios.ConvertAudioToStream;
 
 namespace Services.AudioTranscriptions.TranscribeAudio;
@@ -39,18 +41,34 @@ public class TranscribeAudioService : Service
         };
         DbContext.Add(audioTranscription);
 
-        var modelDetails = await _openAIAPI.Models.RetrieveModelDetailsAsync("ft:davinci-002:personal:project-ai-model:9XXzUFOa");
-        _openAIAPI.Completions.DefaultCompletionRequestArgs.Model = modelDetails.ModelID;
-        _openAIAPI.Completions.DefaultCompletionRequestArgs.MaxTokens = 100;
-        _openAIAPI.Completions.DefaultCompletionRequestArgs.Temperature = 0;
+        var systemMessage = new ChatMessage
+        {
+            Name = "System",
+            Role = ChatMessageRole.System,
+            TextContent = "You are a helpful assistant designed to output JSON."
+        };
 
-        var completion = await _openAIAPI.Completions.CreateCompletionAsync(transcription);
+        var userMessage = new ChatMessage
+        {
+            Name = "User",
+            Role = ChatMessageRole.User,
+            TextContent = $"{transcription}, return JSON with property results, wich is a array of object with three properties, action: stric between values (eat, jump, run). value: a int value by inputed text. kind: the substantive of input"
+        };
 
-        var response = completion.Completions[0].ToString();
-        var json = JObject.Parse(response);
+        var chatRequest = new ChatRequest()
+        {
+            Model = Model.GPT4_Turbo,
+            Temperature = 0.0,
+            MaxTokens = 100,
+            ResponseFormat = ChatRequest.ResponseFormats.JsonObject,
+            Messages = new List<ChatMessage> { systemMessage, userMessage }
+        };
+
+
+        var result = await _openAIAPI.Chat.CreateChatCompletionAsync(chatRequest);
 
         await DbContext.SaveChangesAsync();
 
-        return json.ToString(Newtonsoft.Json.Formatting.None);
+        return result.Choices[0].Message.TextContent;
     }
 }
