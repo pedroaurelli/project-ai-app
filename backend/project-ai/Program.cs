@@ -2,19 +2,30 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Database;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using OpenAI_API;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServices();
+
+builder.Services
+    .AddControllers(options =>
+    {
+        options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+    })
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    });
 
 var configuration = builder.Configuration;
 
