@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { BaseClientOptions } from './clients/base-client'
 import { ApplicationLogsClient } from './clients/application-logs/application-logs-client'
+import { ActionValueClient } from './clients/action-value'
 
 export type ApiClientOptions = {
   baseURL?: string
@@ -8,6 +9,7 @@ export type ApiClientOptions = {
 }
 
 export class ApiClient {
+  actionValues: ActionValueClient
   applicationLogs: ApplicationLogsClient
 
   constructor (options: ApiClientOptions = {}) {
@@ -33,5 +35,6 @@ export class ApiClient {
     )
 
     this.applicationLogs = new ApplicationLogsClient(baseClientOptions)
+    this.actionValues = new ActionValueClient(baseClientOptions)
   }
 }
