@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json.Linq;
 using OpenAI_API;
 using OpenAI_API.Chat;
-using OpenAI_API.Models;
 using Services.Audios.ConvertAudioToStream;
+using System.Text.Json;
 
 namespace Services.AudioTranscriptions.TranscribeAudio;
 
@@ -20,7 +19,7 @@ public class TranscribeAudioService : Service
         _convertAudioToStreamService = convertAudioToStreamService;
     }
 
-    public async Task<string> TranscribeAudioAsync(
+    public async Task<TranscribeAudioResult> TranscribeAudioAsync(
         IFormFile file)
     {
         var audioToStream = await _convertAudioToStreamService.ConvertAudioToStreamAsync(file);
@@ -57,18 +56,19 @@ public class TranscribeAudioService : Service
 
         var chatRequest = new ChatRequest()
         {
-            Model = Model.GPT4_Turbo,
+            Model = "gpt-3.5-turbo-1106",
             Temperature = 0.0,
             MaxTokens = 100,
             ResponseFormat = ChatRequest.ResponseFormats.JsonObject,
             Messages = new List<ChatMessage> { systemMessage, userMessage }
         };
 
+        var jsonResult = await _openAIAPI.Chat.CreateChatCompletionAsync(chatRequest);
 
-        var result = await _openAIAPI.Chat.CreateChatCompletionAsync(chatRequest);
+        var result = JsonSerializer.Deserialize<TranscribeAudioResult>(jsonResult.Choices[0].Message.TextContent);
 
         await DbContext.SaveChangesAsync();
 
-        return result.Choices[0].Message.TextContent;
+        return result!;
     }
 }

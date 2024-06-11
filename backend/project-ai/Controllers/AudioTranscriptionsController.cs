@@ -7,7 +7,7 @@ namespace project_ai.Controllers;
 public class AudioTranscriptionsController : Controller
 {
     [HttpPost("transcribe")]
-    public async Task<IActionResult> TranscribeAudioAsync(
+    public async Task<ActionResult<TranscribeAudioResult>> TranscribeAudioAsync(
         [FromServices] TranscribeAudioService transcribeAudioService,
         IFormFile file)
     {
