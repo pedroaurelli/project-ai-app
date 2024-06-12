@@ -19,7 +19,9 @@ This application is a simulation to user input his actions, is enable by default
 2. POST ```/audio-transcriptions/transcribe``` endpoint, and attach your audio file to be transcribed and formatted to JSON.
 3. POST ```action-values``` endpoint to save data in your database
 
-### How the application works
+## How the application works
+It´s simple, your attached audio file will be transcribed and save to a s3 bucket. The transcription will be saved in database in plain-text, and only the result of endpoint returns a JSON formatted from your transcription audio.
+Then, your transcribed JSON formatted audio can be send to ```action-values``` endpoint to be storage on database.
 
 
 
