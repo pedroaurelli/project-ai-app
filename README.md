@@ -1,16 +1,15 @@
 ## Run the project for the first time
 requirements:
-- docker
-- .net
-- visual studio
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [.NET 8](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0)
+- [Visual Studio](https://visualstudio.microsoft.com/pt-br/downloads/)
 
-step-by-step
+step-by-step:
 1. ```docker-compose up```
 2. ```npm run create-bucket```
-3. cd backend/database
-   3.1 ```dotnet ef database update```
+3. cd backend/database. ```dotnet ef database update```
 4. set your Open-AI API Key in appsetting.json
-5. run the project
+5. run the project. Swagger running at https://localhost:7276/swagger/index.html
 
 ## How to use the application
 This application is a simulation to user input his actions, is enable by default only five actions: Eat; Jump; Walk; Run; Swim.
