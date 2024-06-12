@@ -18,4 +18,6 @@ public class TranscribeAudioResult
 {
     [JsonPropertyName("results")]
     public required List<Result> Results { get; set; }
+
+    public Guid TranscribedAudioId { get; set; }
 }

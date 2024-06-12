@@ -67,6 +67,8 @@ public class TranscribeAudioService : Service
 
         var result = JsonSerializer.Deserialize<TranscribeAudioResult>(jsonResult.Choices[0].Message.TextContent);
 
+        result!.TranscribedAudioId = audioTranscription.Id;
+
         await DbContext.SaveChangesAsync();
 
         return result!;
